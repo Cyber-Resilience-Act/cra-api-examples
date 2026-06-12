@@ -1,0 +1,13 @@
+{
+  "productId": "00000000-0000-0000-0000-000000000001",
+  "productVersion": "1.2.3",
+  "severity": "HIGH",
+  "awarenessAt": "2026-06-12T12:00:00.000Z",
+  "awarenessSource": "INTERNAL_DETECTION",
+  "incidentBrief": "Severe incident facts confirmed by the security team.",
+  "severityCriteria": ["SECURITY_IMPACT"],
+  "suspectedMalicious": true,
+  "marketScopeStatus": "UNKNOWN",
+  "marketScopeUnavailableReason": "Affected Member States are still being confirmed."
+}
+

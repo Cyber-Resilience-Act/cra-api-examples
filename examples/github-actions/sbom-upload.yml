@@ -1,0 +1,25 @@
+name: CRA Direct SBOM Upload
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  upload-sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload SBOM evidence
+        env:
+          API_BASE_URL: ${{ secrets.CRA_API_BASE_URL }}
+          SERVICE_API_KEY: ${{ secrets.CRA_SERVICE_API_KEY }}
+          PRODUCT_ID: ${{ secrets.CRA_PRODUCT_ID }}
+          PRODUCT_VERSION: ${{ github.ref_name }}
+        run: |
+          curl -sS -X POST "$API_BASE_URL/ingest-sbom?queue_analysis=true" \
+            -H "Authorization: Bearer $SERVICE_API_KEY" \
+            -H "X-Product-Id: $PRODUCT_ID" \
+            -F "version=$PRODUCT_VERSION" \
+            -F "files=@./sbom.json;type=application/json"
+

@@ -1,0 +1,7 @@
+{
+  "purls": [
+    "pkg:npm/express@4.17.1",
+    "pkg:npm/lodash@4.17.20"
+  ]
+}
+

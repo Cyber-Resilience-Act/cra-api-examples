@@ -1,0 +1,25 @@
+name: CRA Direct Stateless Scan
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  stateless-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan SBOM
+        env:
+          API_BASE_URL: ${{ secrets.CRA_API_BASE_URL }}
+          SERVICE_API_KEY: ${{ secrets.CRA_SERVICE_API_KEY }}
+        run: |
+          curl -sS -X POST "$API_BASE_URL/scan-sbom" \
+            -H "Authorization: Bearer $SERVICE_API_KEY" \
+            -H "Content-Type: application/json" \
+            -H "X-Product-Name: Demo Product" \
+            -H "X-Product-Version: $GITHUB_SHA" \
+            -H "Idempotency-Key: stateless-$GITHUB_RUN_ID" \
+            --data-binary "@./sbom.json"
+
