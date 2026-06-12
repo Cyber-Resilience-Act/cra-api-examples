@@ -2,6 +2,8 @@
 
 Copy-paste examples for integrating CI/CD pipelines, SBOM generation, stateless scanning, and CRA workflow creation with CRA Direct.
 
+> Independent project notice: this repository is maintained by CRA Direct. It is not affiliated with, endorsed by, or operated by the European Union, ENISA, any CSIRT, or any market surveillance authority.
+
 ## What Is Included
 
 - stateless SBOM scans
@@ -19,6 +21,16 @@ Copy-paste examples for integrating CI/CD pipelines, SBOM generation, stateless 
 Stateless endpoints are useful for demos, preflight checks, and lightweight integrations. They do not persist uploaded SBOMs, scan state, triage progress, or evidence.
 
 The hosted CRA Direct product adds persistent SBOM evidence, product/version records, HITL review, Article 14 workflows, notifications, and audit trails.
+
+Use this split deliberately:
+
+| Need | Use |
+| --- | --- |
+| Try an SBOM scan without creating product records | Stateless scan |
+| Check a short PURL list in CI | PURL scan |
+| Evaluate CRA-oriented triage output | Stateless triage |
+| Retain SBOM evidence for a product version | Persistent SBOM upload |
+| Start a reportable vulnerability or incident workflow | Workflow creation |
 
 ## Environment
 
@@ -45,9 +57,15 @@ Then review:
 - `docs/stateless-scanning.md`
 - `docs/workflow-creation.md`
 
+## Safety Notes
+
+- Store service keys in CI/CD secret storage.
+- Do not commit production SBOMs, incident data, vulnerability evidence, tenant IDs, or service keys.
+- Use stable idempotency keys for retries of the same logical event.
+- Treat these examples as integration patterns, not legal advice or compliance certification.
+
 ## Commercial Support
 
 Need help integrating CRA Direct into your CI/CD, SBOM, vulnerability-management, or compliance workflow?
 
-Contact: replace-with-your-email-or-website
-
+Contact: contact@cra-direct.fr
